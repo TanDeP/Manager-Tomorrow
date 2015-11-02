@@ -45,13 +45,13 @@
     
         //启动定时器,对UI控件进行刷新
 
-    [NSTimer scheduledTimerWithTimeInterval:.2 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
     sender.hidden = YES;
 
 }
 //定时器响应的方法
 - (void)timerAction:(NSTimer *)timer{
-    self.time += 0.2;
+    self.time ++;
     if (self.time >= self.totalTime) {
         //如果到了时间，停止计时器
         [timer invalidate];
@@ -61,14 +61,18 @@
     float next = self.totalTime - self.time;
     NSInteger min = next/60;
     float second = next - min*60;
-    if ((second - second/1) == 0) {
-        NSString *strTime = [NSString stringWithFormat:@"%ld:%.0f",min,second];
+    //当秒数为整数的时候再给label赋值
+    if ((self.time - (self.time / 1)) == 0 ) {
+
         //将时间label赋值
+        NSString *strTime = [NSString stringWithFormat:@"%ld:%.0f",min,second];
         self.timaLabel.text = strTime;
-        //将进度图赋值
-        self.progressView.baifenbi = self.time/self.totalTime;
 
     }
+
+
+    //将进度图赋值
+    self.progressView.baifenbi = self.time/self.totalTime;
 
     
 }
