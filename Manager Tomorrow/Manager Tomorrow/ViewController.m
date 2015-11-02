@@ -67,6 +67,9 @@
         //将时间label赋值
         NSString *strTime = [NSString stringWithFormat:@"%ld:%.0f",min,second];
         self.timaLabel.text = strTime;
+        
+        
+        
 
     }
 
