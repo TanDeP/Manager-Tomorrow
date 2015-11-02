@@ -16,6 +16,7 @@
 		81EEC3541BE70E03007B6367 /* Manager_TomorrowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 81EEC3531BE70E03007B6367 /* Manager_TomorrowTests.m */; };
 		81EEC35F1BE70E03007B6367 /* Manager_TomorrowUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 81EEC35E1BE70E03007B6367 /* Manager_TomorrowUITests.m */; };
 		81EEC36E1BE71712007B6367 /* DrawProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 81EEC36D1BE71712007B6367 /* DrawProgress.m */; settings = {ASSET_TAGS = (); }; };
+		81EEC3B01BE778D8007B6367 /* DaliyCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 81EEC3AF1BE778D8007B6367 /* DaliyCircle.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		81EEC3601BE70E03007B6367 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81EEC36C1BE71712007B6367 /* DrawProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawProgress.h; sourceTree = "<group>"; };
 		81EEC36D1BE71712007B6367 /* DrawProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawProgress.m; sourceTree = "<group>"; };
+		81EEC3AE1BE778D8007B6367 /* DaliyCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaliyCircle.h; sourceTree = "<group>"; };
+		81EEC3AF1BE778D8007B6367 /* DaliyCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DaliyCircle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +113,8 @@
 				81EEC3401BE70E03007B6367 /* ViewController.m */,
 				81EEC36C1BE71712007B6367 /* DrawProgress.h */,
 				81EEC36D1BE71712007B6367 /* DrawProgress.m */,
+				81EEC3AE1BE778D8007B6367 /* DaliyCircle.h */,
+				81EEC3AF1BE778D8007B6367 /* DaliyCircle.m */,
 				81EEC3421BE70E03007B6367 /* Main.storyboard */,
 				81EEC3451BE70E03007B6367 /* Assets.xcassets */,
 				81EEC3471BE70E03007B6367 /* LaunchScreen.storyboard */,
@@ -281,6 +286,7 @@
 				81EEC36E1BE71712007B6367 /* DrawProgress.m in Sources */,
 				81EEC3411BE70E03007B6367 /* ViewController.m in Sources */,
 				81EEC33E1BE70E03007B6367 /* AppDelegate.m in Sources */,
+				81EEC3B01BE778D8007B6367 /* DaliyCircle.m in Sources */,
 				81EEC33B1BE70E03007B6367 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

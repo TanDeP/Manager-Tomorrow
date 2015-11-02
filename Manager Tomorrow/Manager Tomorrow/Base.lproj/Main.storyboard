@@ -34,8 +34,12 @@
                                             <action selector="startButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="twU-6Q-tLW"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Ly-Ot-hcI">
+                                        <rect key="frame" x="-128" y="-12" width="71" height="34"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="b43-EA-VLx" secondAttribute="trailing" constant="30" id="6I3-WW-gZN"/>
                                     <constraint firstAttribute="bottom" secondItem="K6E-0S-0uM" secondAttribute="bottom" constant="80" id="6c8-J0-qkI"/>
@@ -50,6 +54,9 @@
                                     <constraint firstAttribute="trailing" secondItem="K6E-0S-0uM" secondAttribute="trailing" constant="30" id="zPA-96-nIG"/>
                                 </constraints>
                                 <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="9Ly-Ot-hcI"/>
+                                    </mask>
                                     <mask key="constraints">
                                         <exclude reference="ayN-D4-RGG"/>
                                     </mask>
@@ -65,6 +72,10 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j5z-Uh-SVB" customClass="DaliyCircle">
+                                <rect key="frame" x="80" y="528" width="51" height="52"/>
+                                <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="喇叭了" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2WC-zE-52f">
                                 <rect key="frame" x="267" y="76" width="66" height="60"/>
                                 <color key="backgroundColor" red="0.57167940039999998" green="1" blue="0.3273094138" alpha="1" colorSpace="calibratedRGB"/>
@@ -104,7 +115,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="439" y="391"/>
+            <point key="canvasLocation" x="452" y="363"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="4KB-6v-wxi">
+            <objects>
+                <viewController id="XA1-Kp-v4a" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bZ7-yM-o6T"/>
+                        <viewControllerLayoutGuide type="bottom" id="jMN-Kn-gdK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QCk-Pr-xJi">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vGg-iO-JdO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="853" y="378"/>
         </scene>
     </scenes>
 </document>
