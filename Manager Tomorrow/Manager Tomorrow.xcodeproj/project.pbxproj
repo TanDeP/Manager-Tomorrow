@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		816B96441BE8C7F000A2454F /* CompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 816B96431BE8C7F000A2454F /* CompleteViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81961AF21BE84E5A006E7CA6 /* PlanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81961AF11BE84E5A006E7CA6 /* PlanViewController.m */; settings = {ASSET_TAGS = (); }; };
 		81961AFB1BE85994006E7CA6 /* 80s Back Beat 01.caf in Resources */ = {isa = PBXBuildFile; fileRef = 81961AF41BE85994006E7CA6 /* 80s Back Beat 01.caf */; settings = {ASSET_TAGS = (); }; };
 		81961AFC1BE85994006E7CA6 /* Academy All.caf in Resources */ = {isa = PBXBuildFile; fileRef = 81961AF51BE85994006E7CA6 /* Academy All.caf */; settings = {ASSET_TAGS = (); }; };
@@ -45,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		816B96421BE8C7F000A2454F /* CompleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompleteViewController.h; sourceTree = "<group>"; };
+		816B96431BE8C7F000A2454F /* CompleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompleteViewController.m; sourceTree = "<group>"; };
 		81961AF01BE84E5A006E7CA6 /* PlanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanViewController.h; sourceTree = "<group>"; };
 		81961AF11BE84E5A006E7CA6 /* PlanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanViewController.m; sourceTree = "<group>"; };
 		81961AF41BE85994006E7CA6 /* 80s Back Beat 01.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "80s Back Beat 01.caf"; sourceTree = "<group>"; };
@@ -146,6 +149,8 @@
 				81EEC3401BE70E03007B6367 /* ViewController.m */,
 				81961AF01BE84E5A006E7CA6 /* PlanViewController.h */,
 				81961AF11BE84E5A006E7CA6 /* PlanViewController.m */,
+				816B96421BE8C7F000A2454F /* CompleteViewController.h */,
+				816B96431BE8C7F000A2454F /* CompleteViewController.m */,
 				81EEC36C1BE71712007B6367 /* DrawProgress.h */,
 				81EEC36D1BE71712007B6367 /* DrawProgress.m */,
 				81EEC3AE1BE778D8007B6367 /* DaliyCircle.h */,
@@ -326,6 +331,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81EEC36E1BE71712007B6367 /* DrawProgress.m in Sources */,
+				816B96441BE8C7F000A2454F /* CompleteViewController.m in Sources */,
 				81961AF21BE84E5A006E7CA6 /* PlanViewController.m in Sources */,
 				81EEC3411BE70E03007B6367 /* ViewController.m in Sources */,
 				81EEC33E1BE70E03007B6367 /* AppDelegate.m in Sources */,

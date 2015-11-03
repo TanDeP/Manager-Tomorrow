@@ -8,8 +8,18 @@
 
 #import "PlanViewController.h"
 
-@interface PlanViewController ()
+@interface PlanViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIDatePicker *pickView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+//申明一个字典用来存放，计划要干什么事情，什么时间去干。
+@property (nonatomic,strong) NSMutableDictionary *dataDic;
+@property (weak, nonatomic) IBOutlet UIDatePicker *startPicker;
+@property (weak, nonatomic) IBOutlet UIDatePicker *pickerTime;
+@property (weak, nonatomic) IBOutlet UITextField *doingSome;
+- (IBAction)finishBtn:(UIButton *)sender;
+//标志计划是否完成的bool值
+@property (nonatomic,strong) NSMutableDictionary *boolDic;
+
 
 @end
 
@@ -18,9 +28,27 @@
     //本地通知
     UILocalNotification *localNotification;
 }
+/**
+ *对存放数据的字典进行懒加载，并且存入一个数据，我们就对数据进行本地化
+ *取数据的时候我们也是从本地进行读取
+ **/
+- (NSMutableDictionary *)dataDic{
+    if (!_dataDic) {
+        _dataDic = [NSMutableDictionary dictionary];
+    }
+    
+    return _dataDic;
+}
+- (NSMutableDictionary *)boolDic{
+    if (!_boolDic) {
+        _boolDic = [NSMutableDictionary dictionary];
+    }
+    return _boolDic;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     
     //添加向右滑动的手势
     UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeAction:)];
@@ -28,7 +56,6 @@
     [self.view addGestureRecognizer:swipe];
     
     
-
     
     
 }
@@ -45,15 +72,7 @@
     }];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)pickView:(UIDatePicker *)sender {
     /**
@@ -82,11 +101,91 @@
 - (void)startLocalNotification{
     localNotification = [[UILocalNotification alloc]init];
     localNotification.fireDate = self.pickView.date;
+    NSLog(@"===========\n%@",self.pickView.date);
     localNotification.alertBody = @"起床了,新的一天,请开启战斗模式";
     localNotification.soundName = @"80s Back Beat 01.caf";
     //通过app调度本地通知
     UIApplication *app = [UIApplication sharedApplication];
     [app scheduleLocalNotification:localNotification];
+    
+//    //将起床的时间放到字典中,将字典数据本地化
+    [self.dataDic setObject:self.pickView.date forKey:@"起床"];
+    
+    [self dataLocal];
+    
+}
+//数据的本地化
+- (void)dataLocal{
+    //先构建路径
+    NSString *str = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *path = [str stringByAppendingPathComponent:@"dataDic.plist"];
+    [self.dataDic writeToFile:path atomically:YES];
+    
+    NSString *path1 = [str stringByAppendingPathComponent:@"boolDic.plist"];
+    [self.boolDic writeToFile:path1 atomically:YES];
+    //刷新表视图
+    [self.tableView reloadData];
+    
 
+}
+
+//从本地读取数据
+- (void)readLocalData{
+    //从本地读取数据
+    NSString *str = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *path = [str stringByAppendingPathComponent:@"dataDic.plist"];
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:path];
+    self.dataDic = (NSMutableDictionary *)dic;
+
+}
+
+#pragma mark-UITableViewDataSource and UITableViewDelegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    [self readLocalData];
+    return self.dataDic.count;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+    NSArray *arr = [self.dataDic allKeys];
+
+    //获取做该件事情的时间
+    cell.textLabel.text = arr[indexPath.row];
+    NSDate *date = [self.dataDic objectForKey:cell.textLabel.text];
+    //截取date中的时间
+    NSString *string  = [NSString stringWithFormat:@"%@",date];
+    NSArray *component = [string componentsSeparatedByString:@" "];
+    cell.detailTextLabel.text = component[1];
+    
+    
+    return cell;
+    
+}
+- (IBAction)finishBtn:(UIButton *)sender {
+    //当点击完成的时候，我们把用户选择的要干的事情和开始时间本地化
+    [self.dataDic setObject:self.startPicker.date forKey:self.doingSome.text];
+
+    [self.boolDic setObject:@(0) forKey:self.doingSome.text];
+     //本地化数据
+    [self dataLocal];
+    
+    //将完成这件事持续的时间也记录下来
+    NSMutableArray *array = [NSMutableArray array];
+    [array addObject:@(self.pickerTime.countDownDuration)];
+    NSString *str = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *path1 = [str stringByAppendingPathComponent:@"array.plist"];
+    [array writeToFile:path1 atomically:YES];
+    
+    NSLog(@"%@",NSHomeDirectory());
+    
+    
+    //测试本地的数据
+    [self readLocalData];
+    NSLog(@"%@",self.dataDic);
+    
+    //将输入框中的内容清空
+    self.doingSome.text = nil;
 }
 @end

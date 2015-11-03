@@ -33,7 +33,7 @@
      ==================
      **/
      //终点
-    CGFloat endAngle = (M_PI*2) * .3 -M_PI_2;
+    CGFloat endAngle = (M_PI*2) * self.result -M_PI_2;
     UIBezierPath *resultPath = [UIBezierPath bezierPathWithArcCenter:centerPoint radius:radius startAngle:-M_PI_2 endAngle:endAngle clockwise:YES];
     //画两条线，形成一个弧
     CGContextRef context = UIGraphicsGetCurrentContext();
