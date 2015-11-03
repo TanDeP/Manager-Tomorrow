@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "DrawProgress.h"
+#import "PlanViewController.h"
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *label;
 @property (weak, nonatomic) IBOutlet DrawProgress *progressView;
@@ -32,13 +33,29 @@
     [super viewDidLoad];
     self.label.text = @"不玩手机";
     
+    //添加向左滑动的手势
+    UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeAction:)];
+    swipe.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:swipe];
+
+    
     
         
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+/**
+ ============================
+ 手势的响应方法
+ ============================
+ **/
+- (void)swipeAction:(UISwipeGestureRecognizer *)swipe{
+    UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    PlanViewController *plan = [story instantiateViewControllerWithIdentifier:@"plan"];
+    //推出z
+    [self presentViewController:plan animated:YES completion:^{
+        
+    }];
+
 }
 
 - (IBAction)startButton:(UIButton *)sender {
@@ -64,17 +81,15 @@
     float next = self.totalTime - self.time;
     NSInteger min = next/60;
     float second = next - min*60;
-    //当秒数为整数的时候再给label赋值
-    if ((self.time - (self.time / 1)) == 0 ) {
 
-        //将时间label赋值
-        NSString *strTime = [NSString stringWithFormat:@"%02ld:%02.0f",min,second];
-        self.timaLabel.text = strTime;
+
+    //将时间label赋值
+    NSString *strTime = [NSString stringWithFormat:@"%02ld:%02.0f",min,second];
+    self.timaLabel.text = strTime;
         
         
         
 
-    }
 
 
     //将进度图赋值

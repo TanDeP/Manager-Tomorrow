@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		81961AF21BE84E5A006E7CA6 /* PlanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81961AF11BE84E5A006E7CA6 /* PlanViewController.m */; settings = {ASSET_TAGS = (); }; };
+		81961AFB1BE85994006E7CA6 /* 80s Back Beat 01.caf in Resources */ = {isa = PBXBuildFile; fileRef = 81961AF41BE85994006E7CA6 /* 80s Back Beat 01.caf */; settings = {ASSET_TAGS = (); }; };
+		81961AFC1BE85994006E7CA6 /* Academy All.caf in Resources */ = {isa = PBXBuildFile; fileRef = 81961AF51BE85994006E7CA6 /* Academy All.caf */; settings = {ASSET_TAGS = (); }; };
+		81961AFD1BE85994006E7CA6 /* Action Synth.caf in Resources */ = {isa = PBXBuildFile; fileRef = 81961AF61BE85994006E7CA6 /* Action Synth.caf */; settings = {ASSET_TAGS = (); }; };
+		81961AFE1BE85994006E7CA6 /* Ambition Beat.caf in Resources */ = {isa = PBXBuildFile; fileRef = 81961AF71BE85994006E7CA6 /* Ambition Beat.caf */; settings = {ASSET_TAGS = (); }; };
+		81961AFF1BE85994006E7CA6 /* Ambition Electric Piano.caf in Resources */ = {isa = PBXBuildFile; fileRef = 81961AF81BE85994006E7CA6 /* Ambition Electric Piano.caf */; settings = {ASSET_TAGS = (); }; };
+		81961B001BE85994006E7CA6 /* Anthem Fever Synth.caf in Resources */ = {isa = PBXBuildFile; fileRef = 81961AF91BE85994006E7CA6 /* Anthem Fever Synth.caf */; settings = {ASSET_TAGS = (); }; };
+		81961B011BE85994006E7CA6 /* Anvil Smash Beat 01.caf in Resources */ = {isa = PBXBuildFile; fileRef = 81961AFA1BE85994006E7CA6 /* Anvil Smash Beat 01.caf */; settings = {ASSET_TAGS = (); }; };
 		81EEC33B1BE70E03007B6367 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 81EEC33A1BE70E03007B6367 /* main.m */; };
 		81EEC33E1BE70E03007B6367 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 81EEC33D1BE70E03007B6367 /* AppDelegate.m */; };
 		81EEC3411BE70E03007B6367 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81EEC3401BE70E03007B6367 /* ViewController.m */; };
@@ -37,6 +45,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		81961AF01BE84E5A006E7CA6 /* PlanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanViewController.h; sourceTree = "<group>"; };
+		81961AF11BE84E5A006E7CA6 /* PlanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanViewController.m; sourceTree = "<group>"; };
+		81961AF41BE85994006E7CA6 /* 80s Back Beat 01.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "80s Back Beat 01.caf"; sourceTree = "<group>"; };
+		81961AF51BE85994006E7CA6 /* Academy All.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Academy All.caf"; sourceTree = "<group>"; };
+		81961AF61BE85994006E7CA6 /* Action Synth.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Action Synth.caf"; sourceTree = "<group>"; };
+		81961AF71BE85994006E7CA6 /* Ambition Beat.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ambition Beat.caf"; sourceTree = "<group>"; };
+		81961AF81BE85994006E7CA6 /* Ambition Electric Piano.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ambition Electric Piano.caf"; sourceTree = "<group>"; };
+		81961AF91BE85994006E7CA6 /* Anthem Fever Synth.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Anthem Fever Synth.caf"; sourceTree = "<group>"; };
+		81961AFA1BE85994006E7CA6 /* Anvil Smash Beat 01.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Anvil Smash Beat 01.caf"; sourceTree = "<group>"; };
 		81EEC3361BE70E03007B6367 /* Manager Tomorrow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Manager Tomorrow.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81EEC33A1BE70E03007B6367 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		81EEC33C1BE70E03007B6367 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -84,6 +101,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		81961AF31BE85994006E7CA6 /* caf */ = {
+			isa = PBXGroup;
+			children = (
+				81961AF41BE85994006E7CA6 /* 80s Back Beat 01.caf */,
+				81961AF51BE85994006E7CA6 /* Academy All.caf */,
+				81961AF61BE85994006E7CA6 /* Action Synth.caf */,
+				81961AF71BE85994006E7CA6 /* Ambition Beat.caf */,
+				81961AF81BE85994006E7CA6 /* Ambition Electric Piano.caf */,
+				81961AF91BE85994006E7CA6 /* Anthem Fever Synth.caf */,
+				81961AFA1BE85994006E7CA6 /* Anvil Smash Beat 01.caf */,
+			);
+			name = caf;
+			path = ../../../Desktop/caf;
+			sourceTree = "<group>";
+		};
 		81EEC32D1BE70E03007B6367 = {
 			isa = PBXGroup;
 			children = (
@@ -107,10 +139,13 @@
 		81EEC3381BE70E03007B6367 /* Manager Tomorrow */ = {
 			isa = PBXGroup;
 			children = (
+				81961AF31BE85994006E7CA6 /* caf */,
 				81EEC33C1BE70E03007B6367 /* AppDelegate.h */,
 				81EEC33D1BE70E03007B6367 /* AppDelegate.m */,
 				81EEC33F1BE70E03007B6367 /* ViewController.h */,
 				81EEC3401BE70E03007B6367 /* ViewController.m */,
+				81961AF01BE84E5A006E7CA6 /* PlanViewController.h */,
+				81961AF11BE84E5A006E7CA6 /* PlanViewController.m */,
 				81EEC36C1BE71712007B6367 /* DrawProgress.h */,
 				81EEC36D1BE71712007B6367 /* DrawProgress.m */,
 				81EEC3AE1BE778D8007B6367 /* DaliyCircle.h */,
@@ -256,8 +291,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81961AFF1BE85994006E7CA6 /* Ambition Electric Piano.caf in Resources */,
 				81EEC3491BE70E03007B6367 /* LaunchScreen.storyboard in Resources */,
+				81961AFE1BE85994006E7CA6 /* Ambition Beat.caf in Resources */,
+				81961AFB1BE85994006E7CA6 /* 80s Back Beat 01.caf in Resources */,
+				81961AFD1BE85994006E7CA6 /* Action Synth.caf in Resources */,
 				81EEC3461BE70E03007B6367 /* Assets.xcassets in Resources */,
+				81961B011BE85994006E7CA6 /* Anvil Smash Beat 01.caf in Resources */,
+				81961B001BE85994006E7CA6 /* Anthem Fever Synth.caf in Resources */,
+				81961AFC1BE85994006E7CA6 /* Academy All.caf in Resources */,
 				81EEC3441BE70E03007B6367 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,6 +326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81EEC36E1BE71712007B6367 /* DrawProgress.m in Sources */,
+				81961AF21BE84E5A006E7CA6 /* PlanViewController.m in Sources */,
 				81EEC3411BE70E03007B6367 /* ViewController.m in Sources */,
 				81EEC33E1BE70E03007B6367 /* AppDelegate.m in Sources */,
 				81EEC3B01BE778D8007B6367 /* DaliyCircle.m in Sources */,

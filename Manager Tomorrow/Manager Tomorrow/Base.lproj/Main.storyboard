@@ -8,7 +8,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="main" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2xj-cs-CPa"/>
                         <viewControllerLayoutGuide type="bottom" id="g6C-0v-ay4"/>
@@ -115,25 +115,81 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="452" y="363"/>
+            <point key="canvasLocation" x="447" y="363"/>
         </scene>
-        <!--View Controller-->
+        <!--Plan View Controller-->
         <scene sceneID="4KB-6v-wxi">
             <objects>
-                <viewController id="XA1-Kp-v4a" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="plan" id="XA1-Kp-v4a" customClass="PlanViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bZ7-yM-o6T"/>
                         <viewControllerLayoutGuide type="bottom" id="jMN-Kn-gdK"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="QCk-Pr-xJi">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="明日计划" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QBL-G7-mfA">
+                                <rect key="frame" x="96" y="40" width="183" height="53"/>
+                                <color key="backgroundColor" red="0.57167940039999998" green="1" blue="0.3273094138" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="53" id="i96-yq-YWH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="起床" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Uh-cO-jig">
+                                <rect key="frame" x="20" y="145" width="74" height="55"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="XP4-Uu-yFq">
+                                <rect key="frame" x="115" y="139" width="240" height="68"/>
+                                <date key="date" timeIntervalSinceReferenceDate="468209471.00516599">
+                                    <!--2015-11-03 02:11:11 +0000-->
+                                </date>
+                                <connections>
+                                    <action selector="pickView:" destination="XA1-Kp-v4a" eventType="valueChanged" id="SFs-O6-VGk"/>
+                                </connections>
+                            </datePicker>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="QBL-G7-mfA" firstAttribute="top" secondItem="bZ7-yM-o6T" secondAttribute="bottom" constant="20" id="1EQ-gm-q9O"/>
+                            <constraint firstItem="QBL-G7-mfA" firstAttribute="leading" secondItem="QCk-Pr-xJi" secondAttribute="leadingMargin" constant="80" id="NOL-UO-w9e"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QBL-G7-mfA" secondAttribute="trailing" constant="80" id="xFJ-Y5-G2h"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="mYD-qF-dZf"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="pickView" destination="XP4-Uu-yFq" id="TVZ-uI-yxg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vGg-iO-JdO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="853" y="378"/>
+            <point key="canvasLocation" x="1879.5" y="362.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="96c-AK-Ngv">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fOW-BL-hC5" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="50d-O6-i8T">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="XA1-Kp-v4a" kind="relationship" relationship="rootViewController" id="LqR-9e-skx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fzX-tx-591" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1067" y="362"/>
         </scene>
     </scenes>
 </document>
