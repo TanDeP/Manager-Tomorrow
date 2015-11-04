@@ -10,6 +10,12 @@
 
 @implementation DaliyCircle
 
+- (void)setResult:(float)result{
+    _result = result;
+    [self setNeedsDisplay];
+}
+
+
 - (void)drawRect:(CGRect)rect {
     /**
      ==================
@@ -35,25 +41,19 @@
      //终点
     CGFloat endAngle = (M_PI*2) * self.result -M_PI_2;
     UIBezierPath *resultPath = [UIBezierPath bezierPathWithArcCenter:centerPoint radius:radius startAngle:-M_PI_2 endAngle:endAngle clockwise:YES];
-    //画两条线，形成一个弧
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    //第一条线
-    CGContextMoveToPoint(context, centerPoint.x, centerPoint.y);
-    CGContextAddLineToPoint(context,centerPoint.x,centerPoint.y - radius);
-    CGContextStrokePath(context);
-    //第二条线
-        CGContextMoveToPoint(context, centerPoint.x, centerPoint.y);
-    //第二条线的终点
+
+    /*
     CGFloat angle = endAngle - (endAngle/M_PI_2) * M_PI_2;
     float x = rect.origin.x + radius * sin(angle);
     float y = rect.origin.y + radius * cos(angle);
 
-    CGContextAddLineToPoint(context,x,y);
-    CGContextStrokePath(context);
-
-    
-    [[UIColor redColor]set];
-    [resultPath stroke];
+    CGPoint point1 = CGPointMake(centerPoint.x,centerPoint.y - radius);
+    CGPoint point2 = CGPointMake(x, y);
+    [resultPath addLineToPoint:point1];
+    [resultPath addLineToPoint:point2];
+     */
+    [[UIColor greenColor]set];
+    [resultPath fill];
     
 
     

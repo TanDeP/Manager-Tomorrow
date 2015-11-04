@@ -20,6 +20,7 @@
 //标志计划是否完成的bool值
 @property (nonatomic,strong) NSMutableDictionary *boolDic;
 
+@property (nonatomic,strong) NSMutableDictionary *intervalDic;
 
 @end
 
@@ -32,6 +33,7 @@
  *对存放数据的字典进行懒加载，并且存入一个数据，我们就对数据进行本地化
  *取数据的时候我们也是从本地进行读取
  **/
+
 - (NSMutableDictionary *)dataDic{
     if (!_dataDic) {
         _dataDic = [NSMutableDictionary dictionary];
@@ -45,7 +47,12 @@
     }
     return _boolDic;
 }
-
+- (NSMutableDictionary *)intervalDic{
+    if (!_intervalDic) {
+        _intervalDic = [NSMutableDictionary dictionary];
+    }
+    return _intervalDic;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -101,7 +108,7 @@
 - (void)startLocalNotification{
     localNotification = [[UILocalNotification alloc]init];
     localNotification.fireDate = self.pickView.date;
-    NSLog(@"===========\n%@",self.pickView.date);
+
     localNotification.alertBody = @"起床了,新的一天,请开启战斗模式";
     localNotification.soundName = @"80s Back Beat 01.caf";
     //通过app调度本地通知
@@ -109,7 +116,15 @@
     [app scheduleLocalNotification:localNotification];
     
 //    //将起床的时间放到字典中,将字典数据本地化
-    [self.dataDic setObject:self.pickView.date forKey:@"起床"];
+    //修改date的时区
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm +0800"];
+    NSString *string = [dateFormatter stringFromDate:self.pickView.date];
+
+    [self.dataDic setObject:string forKey:@"起床"];
+    [self.boolDic setObject:@(1) forKey:@"起床"];
+    [self.intervalDic setObject:@"0" forKey:@"起床"];
+
     
     [self dataLocal];
     
@@ -123,6 +138,10 @@
     
     NSString *path1 = [str stringByAppendingPathComponent:@"boolDic.plist"];
     [self.boolDic writeToFile:path1 atomically:YES];
+    
+    NSString *path2 = [str stringByAppendingPathComponent:@"intervalDic.plist"];
+    [self.intervalDic writeToFile:path2 atomically:YES];
+
     //刷新表视图
     [self.tableView reloadData];
     
@@ -139,7 +158,6 @@
     self.dataDic = (NSMutableDictionary *)dic;
 
 }
-
 #pragma mark-UITableViewDataSource and UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
@@ -154,8 +172,9 @@
     //获取做该件事情的时间
     cell.textLabel.text = arr[indexPath.row];
     NSDate *date = [self.dataDic objectForKey:cell.textLabel.text];
-    //截取date中的时间
+//    截取date中的时间
     NSString *string  = [NSString stringWithFormat:@"%@",date];
+
     NSArray *component = [string componentsSeparatedByString:@" "];
     cell.detailTextLabel.text = component[1];
     
@@ -164,28 +183,41 @@
     
 }
 - (IBAction)finishBtn:(UIButton *)sender {
+    //修改date的时区
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm +0800"];
+    NSString *string = [dateFormatter stringFromDate:self.startPicker.date];
     //当点击完成的时候，我们把用户选择的要干的事情和开始时间本地化
-    [self.dataDic setObject:self.startPicker.date forKey:self.doingSome.text];
+    [self.dataDic setObject:string forKey:self.doingSome.text];
 
     [self.boolDic setObject:@(0) forKey:self.doingSome.text];
+    [self.intervalDic setObject:@(self.pickerTime.countDownDuration) forKey:self.doingSome.text];
+    
+    NSLog(@"%f",self.pickerTime.countDownDuration);
      //本地化数据
     [self dataLocal];
     
-    //将完成这件事持续的时间也记录下来
-    NSMutableArray *array = [NSMutableArray array];
-    [array addObject:@(self.pickerTime.countDownDuration)];
-    NSString *str = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    NSString *path1 = [str stringByAppendingPathComponent:@"array.plist"];
-    [array writeToFile:path1 atomically:YES];
-    
-    NSLog(@"%@",NSHomeDirectory());
-    
-    
-    //测试本地的数据
-    [self readLocalData];
-    NSLog(@"%@",self.dataDic);
-    
     //将输入框中的内容清空
     self.doingSome.text = nil;
+    /**
+     每当添加一件计划，我们就去创建一个本地通知
+     来提醒用户去干什么
+     **/
+    [self addLocalNotification:self.startPicker.date :self.doingSome.text];
+    
+    
+}
+
+- (void)addLocalNotification:(NSDate *)pickerDate:(NSString *)alertBody{
+    //一天后的时间
+    NSDate *date = [NSDate dateWithTimeInterval:3600*24 sinceDate:pickerDate];
+    //创建本地通知
+    UILocalNotification *localNo = [[UILocalNotification alloc]init];
+    localNo.alertBody = alertBody;
+    localNo.fireDate = pickerDate;
+    localNo.soundName = @"Action Synth.caf";
+    //调用通知
+    [[UIApplication sharedApplication]scheduleLocalNotification:localNo];
+    
 }
 @end

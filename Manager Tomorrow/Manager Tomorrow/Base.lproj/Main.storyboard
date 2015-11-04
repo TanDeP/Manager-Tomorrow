@@ -55,7 +55,7 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dkY-iw-gG1" customClass="DaliyCircle">
                                 <rect key="frame" x="43" y="189" width="290" height="290"/>
-                                <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="290" id="8aX-Lo-9Ns"/>
                                     <constraint firstAttribute="height" constant="290" id="98u-xM-8jC"/>
@@ -152,7 +152,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ybX-h4-NJw">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ybX-h4-NJw">
                                 <rect key="frame" x="0.0" y="58" width="600" height="50"/>
                                 <color key="backgroundColor" red="0.58286406059999996" green="1" blue="0.47892124050000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>

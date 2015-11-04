@@ -36,7 +36,7 @@
 
     NSDictionary *dic = [self readLocalData];
     //对UI控件进行赋值
-    self.totalTasksLabel.text = [NSString stringWithFormat:@"今日总计划数:%ld",dic.count];
+    self.totalTasksLabel.text = [NSString stringWithFormat:@"今日总计划数:%lu",(unsigned long)dic.count];
     //对已经完成的计划进行计算
     int finish = 0;
     //取出bool字典

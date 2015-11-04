@@ -26,8 +26,8 @@
 
 @implementation ViewController
 {
-    NSDictionary *_dic;
-    NSArray *_array;
+    NSMutableDictionary *_dataDic;
+    NSMutableDictionary *_intervalDic;
 
   
 
@@ -51,6 +51,29 @@
     
     return dic;
 }
+//从本地读取数据
+- (NSDictionary *)readBoolDic{
+    //从本地读取数据
+    NSString *str = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *path = [str stringByAppendingPathComponent:@"boolDic.plist"];
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:path];
+    
+    return dic;
+}
+
+
+- (NSMutableDictionary *)readIntervalDic{
+    //从本地读取数据
+    NSString *str = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *path = [str stringByAppendingPathComponent:@"intervalDic.plist"];
+    
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:path];
+
+    return dic;
+    
+}
+
 //从本地读取是否选中的数据
 - (NSMutableDictionary *)readBoolData{
     //从本地读取数据
@@ -62,12 +85,12 @@
     
 }
 //时间间隔的数组
-- (NSArray *)readLocalArray{
+- (NSMutableDictionary *)readLocalBoolDic{
     NSString *str = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    NSString *path1 = [str stringByAppendingPathComponent:@"array.plist"];
+    NSString *path1 = [str stringByAppendingPathComponent:@"boolDic.plist"];
     
-    NSArray *array = [NSArray arrayWithContentsOfFile:path1];
-    return array;
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:path1];
+    return dic;
 }
 //重写标志是否完成计划的数组
 - (void)writeBoolDic{
@@ -76,7 +99,7 @@
     NSString *path = [str stringByAppendingPathComponent:@"boolDic.plist"];
     
     [self.boolDic writeToFile:path atomically:YES];
-    
+    NSLog(@"%@",NSHomeDirectory());
     
 }
 - (void)viewDidLoad {
@@ -91,19 +114,24 @@
     [self writeBoolDic];
     
     //先把数据从本地取出
-    _dic = [self readLocalData];
-    _array = [self readLocalArray];
+    _dataDic = [self readLocalData];
     
-    NSArray *arr = [_dic allKeys];
+    
+    NSArray *arr = [_dataDic allKeys];
 
 
-    if (arr) {
-        self.label.text = arr[1];
-
-    }
+    
     //对总时间进行赋值
-    NSLog(@"%@",_array[0]);
-    self.totalTime = [_array[0] floatValue];
+    for (NSString *string in arr) {
+        if (![self.boolDic objectForKey:string]) {
+            self.label.text = string;
+
+            self.totalTime = [[[self readIntervalDic] objectForKey:string] floatValue];
+            break;
+        }
+    }
+    
+//    self.totalTime = [_array[0] floatValue];
     
     //添加向左滑动的手势
     UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeAction:)];
@@ -155,9 +183,11 @@
 - (IBAction)startButton:(UIButton *)sender {
     
         //启动定时器,对UI控件进行刷新
-
+    self.timaLabel.hidden = NO;
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
     sender.hidden = YES;
+    
+    [self resetTitle];
     //当事件完成后就推送本地通知
     [self addLocalNotification];
 
@@ -166,18 +196,27 @@
 //定时器响应的方法
 - (void)timerAction:(NSTimer *)timer{
     self.time ++;
-    if (self.time >= self.totalTime + 1) {
+    if (self.time >= self.totalTime + .1) {
         //如果到了时间，停止计时器，说明这件计划已经完成
         [timer invalidate];
         self.startBtn.hidden = NO;
+        //隐藏时间值
+        self.timaLabel.hidden = YES;
+
         //将bool数组的中的改为yes
         //获取key值，既刚完成的这件事
         NSString *key = self.label.text;
+        
+        self.boolDic = [self readLocalBoolDic];
         [self.boolDic setObject:@(1) forKey:key];
+        
+        
+        NSLog(@"%@",[self.boolDic objectForKey:key]);
         //数据本地化
         [self writeBoolDic];
+        //重置label和时间间隔
         
-        
+        [self resetTitle];
         return;
     }
     //计算剩余的时间
@@ -187,7 +226,7 @@
 
 
     //将时间label赋值
-    NSString *strTime = [NSString stringWithFormat:@"%02ld:%02.0f",min,second];
+    NSString *strTime = [NSString stringWithFormat:@"%02ld:%02.0f",(long)min,second];
     self.timaLabel.text = strTime;
     
         
@@ -200,6 +239,41 @@
     self.progressView.baifenbi = self.time/self.totalTime;
     
 }
+//当这件事情完成的时候，重置label标题和时间值
+- (void)resetTitle{
+    self.boolDic = (NSMutableDictionary *)[self readLocalBoolDic];
+    NSArray *array = [self.boolDic allKeys];
+    int num = 0;
+    _intervalDic = [self readIntervalDic];
+    for (NSString *key in array) {
+        NSNumber *number = [self.boolDic objectForKey:key];
+        num ++;
+        if (![number boolValue]) {
+            self.label.text = key;
+            
+            
+//            //计算剩余的时间
+//            
+//            float next = [[_array lastObject] floatValue];
+//            NSInteger min = next/60;
+//            float second = next - min*60;
+            
+            
+//            //将时间label赋值
+//            NSString *strTime = [NSString stringWithFormat:@"%02ld:%02.0f",(long)min,second];
+
+//            self.timaLabel.text = strTime;
+            
+            //设置总的时间长度
+            self.totalTime = [[_intervalDic objectForKey:key] floatValue];
+            
+            
+        }
+    }
+    
+}
+
+
 //本地的通知
 - (void)addLocalNotification{
     UILocalNotification *localNotification = [[UILocalNotification alloc]init];
