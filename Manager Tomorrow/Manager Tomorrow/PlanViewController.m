@@ -7,7 +7,7 @@
 //
 
 #import "PlanViewController.h"
-
+#import "PreferenceTableViewController.h"
 @interface PlanViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIDatePicker *pickView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -61,6 +61,11 @@
     UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeAction:)];
     swipe.direction = UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:swipe];
+    //添加向左滑动的手势
+    UISwipeGestureRecognizer *swipe1 = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeAction:)];
+    swipe1.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:swipe1];
+
     
     
     
@@ -73,10 +78,20 @@
  ============================
  **/
 - (void)swipeAction:(UISwipeGestureRecognizer *)swipe{
+    if (swipe.direction == UISwipeGestureRecognizerDirectionRight) {
+        [self dismissViewControllerAnimated:YES completion:^{
+            
+        }];
 
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
+    }else{
+        UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+       PreferenceTableViewController *prefer = [story instantiateViewControllerWithIdentifier:@"preference"];
+        //推出z
+        [self presentViewController:prefer animated:NO completion:^{
+            
+        }];
+
+    }
 }
 
 
@@ -107,7 +122,10 @@
 
 - (void)startLocalNotification{
     localNotification = [[UILocalNotification alloc]init];
-    localNotification.fireDate = self.pickView.date;
+    //一天后的时间
+    NSDate *date = [NSDate dateWithTimeInterval:3600*24 sinceDate:self.pickView.date];
+
+    localNotification.fireDate = date;
 
     localNotification.alertBody = @"起床了,新的一天,请开启战斗模式";
     localNotification.soundName = @"80s Back Beat 01.caf";
@@ -156,6 +174,13 @@
     
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:path];
     self.dataDic = (NSMutableDictionary *)dic;
+    
+    //*****************************************/
+    NSString *path1 = [str stringByAppendingPathComponent:@"boolDic.plist"];
+    self.boolDic = [NSMutableDictionary dictionaryWithContentsOfFile:path1];
+    NSString *path2 = [str stringByAppendingPathComponent:@"intervalDic.plist"];
+    self.intervalDic = [NSMutableDictionary dictionaryWithContentsOfFile:path2];
+
 
 }
 #pragma mark-UITableViewDataSource and UITableViewDelegate
@@ -192,9 +217,7 @@
 
     [self.boolDic setObject:@(0) forKey:self.doingSome.text];
     [self.intervalDic setObject:@(self.pickerTime.countDownDuration) forKey:self.doingSome.text];
-    
-    NSLog(@"%f",self.pickerTime.countDownDuration);
-     //本地化数据
+    //本地化数据
     [self dataLocal];
     
     //将输入框中的内容清空
@@ -208,13 +231,13 @@
     
 }
 
-- (void)addLocalNotification:(NSDate *)pickerDate:(NSString *)alertBody{
+- (void)addLocalNotification:(NSDate *)pickerD:(NSString *)alertB{
     //一天后的时间
-    NSDate *date = [NSDate dateWithTimeInterval:3600*24 sinceDate:pickerDate];
+    NSDate *date = [NSDate dateWithTimeInterval:3600*24 sinceDate:pickerD];
     //创建本地通知
     UILocalNotification *localNo = [[UILocalNotification alloc]init];
-    localNo.alertBody = alertBody;
-    localNo.fireDate = pickerDate;
+    localNo.alertBody = alertB;
+    localNo.fireDate = date;
     localNo.soundName = @"Action Synth.caf";
     //调用通知
     [[UIApplication sharedApplication]scheduleLocalNotification:localNo];

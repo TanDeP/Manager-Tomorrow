@@ -31,6 +31,7 @@
     //4.画一整个圆
     UIBezierPath *allPath = [UIBezierPath bezierPathWithArcCenter:centerPoint radius:radius startAngle:-M_PI_2 endAngle:M_PI*2-M_PI_2 clockwise:YES];
     [[UIColor orangeColor]set];
+    allPath.lineCapStyle = kCGLineCapSquare;
     [allPath fill];
     
     /**
@@ -41,7 +42,7 @@
      //终点
     CGFloat endAngle = (M_PI*2) * self.result -M_PI_2;
     UIBezierPath *resultPath = [UIBezierPath bezierPathWithArcCenter:centerPoint radius:radius startAngle:-M_PI_2 endAngle:endAngle clockwise:YES];
-
+    NSLog(@"%f",self.result);
     /*
     CGFloat angle = endAngle - (endAngle/M_PI_2) * M_PI_2;
     float x = rect.origin.x + radius * sin(angle);
@@ -52,6 +53,8 @@
     [resultPath addLineToPoint:point1];
     [resultPath addLineToPoint:point2];
      */
+    
+    resultPath.lineCapStyle = kCGLineCapSquare;
     [[UIColor greenColor]set];
     [resultPath fill];
     

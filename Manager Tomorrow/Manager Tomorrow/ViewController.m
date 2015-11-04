@@ -131,7 +131,7 @@
         }
     }
     
-//    self.totalTime = [_array[0] floatValue];
+
     
     //添加向左滑动的手势
     UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeAction:)];
@@ -199,6 +199,7 @@
     if (self.time >= self.totalTime + .1) {
         //如果到了时间，停止计时器，说明这件计划已经完成
         [timer invalidate];
+        self.time = 0;
         self.startBtn.hidden = NO;
         //隐藏时间值
         self.timaLabel.hidden = YES;
@@ -208,10 +209,14 @@
         NSString *key = self.label.text;
         
         self.boolDic = [self readLocalBoolDic];
+
+        
+        NSLog(@"%@",self.boolDic);
         [self.boolDic setObject:@(1) forKey:key];
         
         
-        NSLog(@"%@",[self.boolDic objectForKey:key]);
+        NSLog(@"%@",self.boolDic);
+
         //数据本地化
         [self writeBoolDic];
         //重置label和时间间隔

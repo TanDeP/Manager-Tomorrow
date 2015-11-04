@@ -52,7 +52,10 @@
     }
     self.hasFinishedLabel.text = [NSString stringWithFormat:@"已完成计划数:%d",finish];
     //对中心表示进度的圆圈的属性进行赋值
-    self.circleView.result = finish/dic.count;
+    if (dic.count != 0) {
+        float count = (float)dic.count;
+        self.circleView.result = finish/count;
+    }
 
 }
 //从本地读取数据
